@@ -1,0 +1,135 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.darkMode {
+    background-color: black;
+    color: white;
+}
+.changeTheme {
+    font-size: 24px;
+    background-color: inherit;
+    outline: none;
+    border: none;
+}
+
+.fontAwesomeLight {
+    font-family: 'Font Awesome 5 Pro Light';    
+}
+
+.item {
+    text-align: center; 
+}
+button:hover {
+    cursor: pointer;
+}
+.incrementDecrementInfo button {
+    font-size: 26px;
+    outline: none;
+}
+.incrementDecrementInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.plus {
+    background-color: green;
+    color: white;
+}
+.minus {
+    background-color: red;
+    color: white;
+}
+.incrementDecrement {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 22px;
+    width: 100%;
+}
+.incrementDecrementNumber {
+    margin: 10px 20px;
+}
+.defaultBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    font-size: 16px !important;
+}
+
+.toDoList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+.toDoDate {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.toDoConfirm {
+    background-color: lightgreen;
+    outline: none;
+}
+.toDoDelete {
+    margin: 0 7px;
+    background-color: red;
+    outline: none;
+}
+.toDoEdit {
+    background-color: skyblue;
+    outline: none;
+}
+.toDoName {
+    width: 35%;
+}
+.toDoCompleted {
+    text-decoration: line-through;
+}
+.toDoConfirmEditing {
+    background-color: blue;
+    outline: none;
+}
+.toDoTime {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40.3%;
+    margin: 30px 0;
+}
+.toDoh2 {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+.toDoCreatedTime {
+    margin: 0;
+    margin-top: 4px;
+}
+.toDo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    margin: 10px 0 0 0;
+}
+.toDoh3 {
+    width: 100%;
+    margin: 0;
+}
+.toDoButtons {
+    display: flex;
+    align-items: center;
+}
+.toDoh3Input {
+    width: 97%;
+}
+
+.time {
+    font-size: 24px;
+    margin: 0;
+}
