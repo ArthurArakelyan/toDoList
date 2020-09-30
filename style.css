@@ -124,6 +124,8 @@ button:hover {
 .toDoButtons {
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding-left: 10px;
 }
 .toDoh3Input {
     width: 97%;

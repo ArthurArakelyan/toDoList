@@ -116,12 +116,14 @@ class Todo {
 
         if(!toDoName.value.trim()) {
             this.toDo.remove();
-            alert('Error!');
         }
 
         this.toDoComplete.addEventListener('click', () => {
             this.toDoh3.classList.toggle('toDoCompleted');
+            this.toDoCreatedTime.innerHTML = `Completed: ${new Date().toLocaleTimeString()}`;
         });
+
+        this.toDoh3Content = this.toDoh3.textContent.trim();
 
         this.toDoEdit.addEventListener('click', () => {
             this.toDoEdit.style.display = 'none';
@@ -134,9 +136,13 @@ class Todo {
 
 
             this.toDoConfirmEditing.addEventListener('click', () => {
-                this.toDoh3.innerHTML = `${this.toDoh3Input.value}`; 
+                this.toDoh3.innerHTML = `${this.toDoh3Input.value}`;
                 this.toDoConfirmEditing.remove();
                 this.toDoCreatedTime.innerHTML = `Edited: ${new Date().toLocaleTimeString()}`;
+
+                if(!this.toDoh3Input.value.trim()) {
+                    this.toDoh3.innerHTML = this.toDoh3Content;
+                }
 
                 this.toDoEdit.style.display = 'block';
             });
@@ -160,6 +166,6 @@ const time = document.querySelector('.time');
 time.textContent = new Date().toLocaleTimeString();
 
 setInterval(() => {
-    let date = new Date().toLocaleTimeString();
+    const date = new Date().toLocaleTimeString();
     time.textContent = date;
 }, 1000);
