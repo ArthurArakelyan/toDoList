@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+.wrapper {
+    width: 600px;
+    margin: 0 auto;
+}
+
 .darkMode {
     background-color: black;
     color: white;
@@ -85,7 +90,10 @@ button:hover {
     outline: none;
 }
 .toDoName {
-    width: 35%;
+    width: 90%;
+}
+.addTodo {
+    width: 10%;
 }
 .toDoCompleted {
     text-decoration: line-through;
@@ -95,26 +103,28 @@ button:hover {
     outline: none;
 }
 .toDoTime {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 40.3%;
+    justify-content: center;
+    width: 100%;
     margin: 30px 0;
 }
 .toDoh2 {
-    width: 100%;
-    text-align: center;
+    width: 50%;
+    text-align: start;
     margin: 0;
+    font-size: 24px;
 }
 .toDoCreatedTime {
     margin: 0;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 .toDo {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 40%;
+    width: 100%;
     margin: 10px 0 0 0;
 }
 .toDoh3 {
@@ -132,6 +142,29 @@ button:hover {
 }
 
 .time {
-    font-size: 24px;
+    text-align: end;
+    width: 50%;
+    font-size: 22px;
     margin: 0;
+}
+
+@media only screen and (max-width: 610px) {
+    .wrapper {
+        width: 95%;
+    }
+}
+
+@media only screen and (max-width: 498px) {
+    .wrapper {
+        width: 99%;
+    }
+    .toDoName {
+        width: 86%;
+    }
+    .addTodo {
+        width: 14%;
+    }
+    .toDoDate {
+        justify-content: space-between;
+    }
 }

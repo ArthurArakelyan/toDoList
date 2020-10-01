@@ -123,7 +123,7 @@ class Todo {
             this.toDoCreatedTime.innerHTML = `Completed: ${new Date().toLocaleTimeString()}`;
         });
 
-        this.toDoh3Content = this.toDoh3.textContent.trim();
+        
 
         this.toDoEdit.addEventListener('click', () => {
             this.toDoEdit.style.display = 'none';
@@ -134,17 +134,17 @@ class Todo {
             this.toDoConfirmEditing.classList.add('toDoConfirmEditing');
             this.toDoh3Input = document.querySelector('.toDoh3Input');
 
+            this.toDoh3FirstContent = this.toDoh3Input.value;
 
             this.toDoConfirmEditing.addEventListener('click', () => {
                 this.toDoh3.innerHTML = `${this.toDoh3Input.value}`;
                 this.toDoConfirmEditing.remove();
                 this.toDoCreatedTime.innerHTML = `Edited: ${new Date().toLocaleTimeString()}`;
+                this.toDoEdit.style.display = 'block';
 
                 if(!this.toDoh3Input.value.trim()) {
-                    this.toDoh3.innerHTML = this.toDoh3Content;
+                    this.toDoh3.innerHTML = this.toDoh3FirstContent;
                 }
-
-                this.toDoEdit.style.display = 'block';
             });
         });
 
@@ -153,6 +153,7 @@ class Todo {
         });
     }
 
+    toDoh3Input = document.querySelector('.toDoh3Input');
     toDoList = document.querySelector('.toDoList');
     toDoName = document.querySelector('.toDoName');
 }
