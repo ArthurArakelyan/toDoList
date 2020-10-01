@@ -119,11 +119,15 @@ class Todo {
         }
 
         this.toDoComplete.addEventListener('click', () => {
-            this.toDoh3.classList.toggle('toDoCompleted');
-            this.toDoCreatedTime.innerHTML = `Completed: ${new Date().toLocaleTimeString()}`;
+            if(this.toDoComplete.textContent === 'Completed') {
+                this.toDoh3.classList.add('toDoCompleted');
+                this.toDoCreatedTime.innerHTML = `Completed: ${new Date().toLocaleTimeString()}`;
+                this.toDoComplete.innerHTML = 'No completed';
+            } else {
+                this.toDoh3.classList.remove('toDoCompleted');
+                this.toDoComplete.innerHTML = 'Completed';
+            }
         });
-
-        
 
         this.toDoEdit.addEventListener('click', () => {
             this.toDoEdit.style.display = 'none';
@@ -153,7 +157,17 @@ class Todo {
         });
     }
 
-    toDoh3Input = document.querySelector('.toDoh3Input');
+    toDoTime() {
+        this.time = this.toDoClock.appendChild(document.createElement('p'));
+        this.time.classList.add('time');
+        this.time.textContent = new Date().toLocaleTimeString();
+        
+        setInterval(() => {
+            return this.time.textContent = new Date().toLocaleTimeString();
+        }, 1000);
+    }
+
+    toDoClock = document.querySelector('.toDoTime');
     toDoList = document.querySelector('.toDoList');
     toDoName = document.querySelector('.toDoName');
 }
@@ -163,10 +177,5 @@ addTodo.addEventListener('click', () => {
     toDoName.value = '';
 });
 
-const time = document.querySelector('.time');
-time.textContent = new Date().toLocaleTimeString();
-
-setInterval(() => {
-    const date = new Date().toLocaleTimeString();
-    time.textContent = date;
-}, 1000);
+const ToDo = new Todo();
+ToDo.toDoTime();
