@@ -114,7 +114,7 @@ class Todo {
         this.toDoEdit.innerHTML = 'Edit';
         this.toDoEdit.classList.add('toDoEdit');
 
-        if(!toDoName.value.trim()) {
+        if(!this.toDoName.value.trim()) {
             this.toDo.remove();
         }
 
@@ -154,6 +154,15 @@ class Todo {
 
         this.toDoDelete.addEventListener('click', () => {
             this.toDo.remove();
+            this.ToDoRemoveAlert = this.removedToDoBlock.appendChild(this.toDo);
+            this.ToDoRemoveAlert.classList.remove('toDo');
+            this.ToDoRemoveAlert.classList.add('removedToDo');
+            this.ToDoRemoveAlert.lastChild.remove();
+            this.ToDoRemoveAlert.firstChild.lastChild.innerHTML = `Removed: ${new Date().toLocaleTimeString()}`;
+
+            setTimeout(() => {
+                this.ToDoRemoveAlert.remove();
+            }, 5000);
         });
     }
 
@@ -167,6 +176,7 @@ class Todo {
         }, 1000);
     }
 
+    removedToDoBlock = document.querySelector('.removedToDoBlock');
     toDoClock = document.querySelector('.toDoTime');
     toDoList = document.querySelector('.toDoList');
     toDoName = document.querySelector('.toDoName');

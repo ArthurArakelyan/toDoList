@@ -140,6 +140,19 @@ button:hover {
 .toDoh3Input {
     width: 97%;
 }
+.removedToDo {
+    margin: 0 0 10px 10px;
+}
+.removedToDoBlock {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    color: red;
+}
 
 .time {
     text-align: end;
