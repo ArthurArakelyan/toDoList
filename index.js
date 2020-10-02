@@ -161,6 +161,9 @@ class Todo {
             this.ToDoRemoveAlert.firstChild.lastChild.innerHTML = `Removed: ${new Date().toLocaleTimeString()}`;
 
             setTimeout(() => {
+                this.ToDoRemoveAlert.style.opacity = 0;
+            }, 3000);
+            setTimeout(() => {
                 this.ToDoRemoveAlert.remove();
             }, 5000);
         });
