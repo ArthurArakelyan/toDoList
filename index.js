@@ -160,6 +160,10 @@ class Todo {
             this.ToDoRemoveAlert.lastChild.remove();
             this.ToDoRemoveAlert.firstChild.lastChild.innerHTML = `Removed: ${new Date().toLocaleTimeString()}`;
 
+            if(this.ToDoRemoveAlert.firstChild.firstChild.firstChild.tagName === 'INPUT') {
+                this.toDoh3.innerHTML = this.toDoh3FirstContent;
+            }
+
             setTimeout(() => {
                 this.ToDoRemoveAlert.style.opacity = 0;
             }, 3000);
