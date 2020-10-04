@@ -127,6 +127,23 @@ class Todo {
                 this.toDoh3.classList.remove('toDoCompleted');
                 this.toDoComplete.innerHTML = 'Completed';
             }
+
+            this.toDoClone = this.toDo.cloneNode(true);
+
+            if(this.toDoComplete.textContent === 'No completed') {
+                this.toDoCompleteAlert = this.toDoAlertsBlock.appendChild(this.toDoClone);
+                this.toDoCompleteAlert.classList.remove('toDo');
+                this.toDoCompleteAlert.classList.add('completedToDo');
+                this.toDoCompleteAlert.lastChild.remove();
+            }
+            
+            this.toDoCompleteAlert.firstChild.firstChild.classList.remove('toDoCompleted');
+            
+            if(this.toDoCompleteAlert.firstChild.firstChild.firstChild.tagName === 'INPUT') {
+                this.toDoCompleteAlert.firstChild.firstChild.innerHTML = this.toDoh3FirstContent;
+            }
+
+            this.toDoAlertRemoving(this.toDoCompleteAlert);
         });
 
         this.toDoEdit.addEventListener('click', () => {
@@ -154,7 +171,7 @@ class Todo {
 
         this.toDoDelete.addEventListener('click', () => {
             this.toDo.remove();
-            this.ToDoRemoveAlert = this.removedToDoBlock.appendChild(this.toDo);
+            this.ToDoRemoveAlert = this.toDoAlertsBlock.appendChild(this.toDo);
             this.ToDoRemoveAlert.classList.remove('toDo');
             this.ToDoRemoveAlert.classList.add('removedToDo');
             this.ToDoRemoveAlert.lastChild.remove();
@@ -163,14 +180,18 @@ class Todo {
             if(this.ToDoRemoveAlert.firstChild.firstChild.firstChild.tagName === 'INPUT') {
                 this.toDoh3.innerHTML = this.toDoh3FirstContent;
             }
-
-            setTimeout(() => {
-                this.ToDoRemoveAlert.style.opacity = 0;
-            }, 3000);
-            setTimeout(() => {
-                this.ToDoRemoveAlert.remove();
-            }, 5000);
+            
+            this.toDoAlertRemoving(this.ToDoRemoveAlert);
         });
+    }
+
+    toDoAlertRemoving(alert) {
+        setTimeout(() => {
+            alert.style.opacity = 0;
+        }, 3000);
+        setTimeout(() => {
+            alert.remove();
+        }, 5000); 
     }
 
     toDoTime() {
@@ -183,7 +204,7 @@ class Todo {
         }, 1000);
     }
 
-    removedToDoBlock = document.querySelector('.removedToDoBlock');
+    toDoAlertsBlock = document.querySelector('.toDoAlertsBlock');
     toDoClock = document.querySelector('.toDoTime');
     toDoList = document.querySelector('.toDoList');
     toDoName = document.querySelector('.toDoName');

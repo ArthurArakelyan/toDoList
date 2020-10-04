@@ -129,6 +129,7 @@ button:hover {
 }
 .toDoh3 {
     width: 100%;
+    font-size: 17px;
     margin: 0;
 }
 .toDoButtons {
@@ -144,8 +145,15 @@ button:hover {
     margin: 0 0 10px 10px;
     opacity: 1;
     transition: opacity 2s ease-in-out;
+    color: red;
 }
-.removedToDoBlock {
+.completedToDo {
+    margin: 0 0 10px 10px;
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+    color: lightgreen;
+}
+.toDoAlertsBlock {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -153,7 +161,6 @@ button:hover {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    color: red;
 }
 
 .time {
@@ -212,5 +219,8 @@ button:hover {
     }
     .toDoButtons button:nth-child(2) {
         margin: 0 10px;
+    }
+    .toDoButtons button {
+        font-size: 12px;
     }
 }
