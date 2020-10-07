@@ -127,10 +127,11 @@ button:hover {
     width: 100%;
     margin: 10px 0 0 0;
 }
-.toDoh3 {
+.toDoWork {
     width: 100%;
     font-size: 17px;
     margin: 0;
+    line-break: anywhere;
 }
 .toDoButtons {
     display: flex;

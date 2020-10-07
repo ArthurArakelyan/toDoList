@@ -82,6 +82,7 @@ defaultBtn.addEventListener('click', () => {
 
 const addTodo = document.querySelector('.addTodo');
 const toDoName = document.querySelector('.toDoName');
+const toDoDate = document.querySelector('.toDoDate');
 
 class Todo {
     constructor() {
@@ -91,9 +92,9 @@ class Todo {
         this.toDoInfo = this.toDo.appendChild(document.createElement('div'));
         this.toDoInfo.classList.add('toDoInfo');
 
-        this.toDoh3 = this.toDoInfo.appendChild(document.createElement('h3'));
-        this.toDoh3.innerHTML = `${this.toDoName.value}`;
-        this.toDoh3.classList.add('toDoh3');
+        this.toDoWork = this.toDoInfo.appendChild(document.createElement('h3'));
+        this.toDoWork.innerHTML = `${this.toDoName.value}`;
+        this.toDoWork.classList.add('toDoWork');
 
         this.toDoCreatedTime = this.toDoInfo.appendChild(document.createElement('p'));
         this.toDoCreatedTime.innerHTML = `Created: ${new Date().toLocaleTimeString()}`;
@@ -120,11 +121,11 @@ class Todo {
 
         this.toDoComplete.addEventListener('click', () => {
             if(this.toDoComplete.textContent === 'Completed') {
-                this.toDoh3.classList.add('toDoCompleted');
+                this.toDoWork.classList.add('toDoCompleted');
                 this.toDoCreatedTime.innerHTML = `Completed: ${new Date().toLocaleTimeString()}`;
                 this.toDoComplete.innerHTML = 'No completed';
             } else {
-                this.toDoh3.classList.remove('toDoCompleted');
+                this.toDoWork.classList.remove('toDoCompleted');
                 this.toDoComplete.innerHTML = 'Completed';
             }
 
@@ -140,7 +141,7 @@ class Todo {
             this.toDoCompleteAlert.firstChild.firstChild.classList.remove('toDoCompleted');
             
             if(this.toDoCompleteAlert.firstChild.firstChild.firstChild.tagName === 'INPUT') {
-                this.toDoCompleteAlert.firstChild.firstChild.innerHTML = this.toDoh3FirstContent;
+                this.toDoCompleteAlert.firstChild.firstChild.innerHTML = this.toDoWorkFirstContent;
             }
 
             this.toDoAlertRemoving(this.toDoCompleteAlert);
@@ -149,22 +150,22 @@ class Todo {
         this.toDoEdit.addEventListener('click', () => {
             this.toDoEdit.style.display = 'none';
 
-            this.toDoh3.innerHTML = `<input type="text" value="${this.toDoh3.textContent.trim()}" class="toDoh3Input">`;
+            this.toDoWork.innerHTML = `<input type="text" value="${this.toDoWork.textContent.trim()}" class="toDoWorkInput">`;
             this.toDoConfirmEditing = this.toDoButtons.appendChild(document.createElement('button'));
             this.toDoConfirmEditing.innerHTML = 'Confirm';
             this.toDoConfirmEditing.classList.add('toDoConfirmEditing');
-            this.toDoh3Input = document.querySelector('.toDoh3Input');
+            this.toDoWorkInput = document.querySelector('.toDoWorkInput');
 
-            this.toDoh3FirstContent = this.toDoh3Input.value;
+            this.toDoWorkFirstContent = this.toDoWorkInput.value;
 
             this.toDoConfirmEditing.addEventListener('click', () => {
-                this.toDoh3.innerHTML = `${this.toDoh3Input.value}`;
+                this.toDoWork.innerHTML = `${this.toDoWorkInput.value}`;
                 this.toDoConfirmEditing.remove();
                 this.toDoCreatedTime.innerHTML = `Edited: ${new Date().toLocaleTimeString()}`;
                 this.toDoEdit.style.display = 'block';
 
-                if(!this.toDoh3Input.value.trim()) {
-                    this.toDoh3.innerHTML = this.toDoh3FirstContent;
+                if(!this.toDoWorkInput.value.trim()) {
+                    this.toDoWork.innerHTML = this.toDoWorkFirstContent;
                 }
             });
         });
@@ -178,7 +179,7 @@ class Todo {
             this.ToDoRemoveAlert.firstChild.lastChild.innerHTML = `Removed: ${new Date().toLocaleTimeString()}`;
 
             if(this.ToDoRemoveAlert.firstChild.firstChild.firstChild.tagName === 'INPUT') {
-                this.toDoh3.innerHTML = this.toDoh3FirstContent;
+                this.toDoWork.innerHTML = this.toDoWorkFirstContent;
             }
             
             this.toDoAlertRemoving(this.ToDoRemoveAlert);
@@ -210,7 +211,8 @@ class Todo {
     toDoName = document.querySelector('.toDoName');
 }
 
-addTodo.addEventListener('click', () => {
+toDoDate.addEventListener('submit', (e) => {
+    e.preventDefault();
     new Todo();
     toDoName.value = '';
 });
