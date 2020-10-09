@@ -81,9 +81,11 @@ button:hover {
     outline: none;
 }
 .toDoDelete {
-    margin: 0 7px;
     background-color: red;
     outline: none;
+}
+.toDoButtons button:nth-child(2) {
+    margin: 0 7px;
 }
 .toDoEdit {
     background-color: skyblue;

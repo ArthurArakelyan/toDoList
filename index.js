@@ -171,18 +171,28 @@ class Todo {
         });
 
         this.toDoDelete.addEventListener('click', () => {
-            this.toDo.remove();
-            this.ToDoRemoveAlert = this.toDoAlertsBlock.appendChild(this.toDo);
-            this.ToDoRemoveAlert.classList.remove('toDo');
-            this.ToDoRemoveAlert.classList.add('removedToDo');
-            this.ToDoRemoveAlert.lastChild.remove();
-            this.ToDoRemoveAlert.firstChild.lastChild.innerHTML = `Removed: ${new Date().toLocaleTimeString()}`;
+            this.toDoRemovedClone = this.toDo.cloneNode(true);
 
-            if(this.ToDoRemoveAlert.firstChild.firstChild.firstChild.tagName === 'INPUT') {
-                this.toDoWork.innerHTML = this.toDoWorkFirstContent;
+            this.toDo.remove();
+            this.toDoRemoveAlert = this.toDoAlertsBlock.appendChild(this.toDoRemovedClone);
+            this.toDoRemoveAlert.classList.add('removedToDo');
+            this.toDoRemoveAlert.lastChild.remove();
+            this.toDoRemovedTime = this.toDoRemoveAlert.firstChild.lastChild.innerHTML = `Removed: ${new Date().toLocaleTimeString()}`;
+
+            this.toDoRestablish = this.toDoRemoveAlert.appendChild(document.createElement('button'));
+            this.toDoRestablish.innerHTML = 'Restablish';
+
+            this.toDoRestablish.addEventListener('click', () => {
+                this.toDoList.appendChild(this.toDo);
+                this.toDo.firstChild.lastChild.innerHTML = this.toDoRemovedTime;
+                this.toDoRemoveAlert.remove();
+            });
+
+            if(this.toDoRemoveAlert.firstChild.firstChild.firstChild.tagName === 'INPUT') {
+                this.toDoRemoveAlert.firstChild.firstChild.innerHTML = this.toDoWorkFirstContent;
             }
-            
-            this.toDoAlertRemoving(this.ToDoRemoveAlert);
+
+            this.toDoAlertRemoving(this.toDoRemoveAlert);
         });
     }
 
