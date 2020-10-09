@@ -181,6 +181,7 @@ class Todo {
 
             this.toDoRestablish = this.toDoRemoveAlert.appendChild(document.createElement('button'));
             this.toDoRestablish.innerHTML = 'Restablish';
+            this.toDoRestablish.classList.add('restablishBtn');
 
             this.toDoRestablish.addEventListener('click', () => {
                 this.toDoList.appendChild(this.toDo);
