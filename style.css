@@ -7,8 +7,11 @@
     margin: 0 auto;
 }
 
+body {
+    transition: background-color 0.1s ease-in-out, color 0.2s ease-in-out;
+}
 .darkMode {
-    background-color: black;
+    background-color: #202020;
     color: white;
 }
 .changeTheme {
@@ -74,7 +77,7 @@ button:hover {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 .toDoConfirm {
     background-color: lightgreen;
@@ -92,10 +95,22 @@ button:hover {
     outline: none;
 }
 .toDoName {
-    width: 90%;
+    width: 85%;
+    background-color: transparent;
+    border: none;
+    border-bottom: dimgray 2px solid;
+    outline: none;
 }
 .addTodo {
+    background-color: lightgreen;
+    padding: 2px 5px;
+    border: dimgray 2px solid;
+    border-radius: 3px;
     width: 10%;
+    outline: none;
+}
+.addTodo:hover {
+    opacity: 0.9;
 }
 .toDoCompleted {
     text-decoration: line-through;

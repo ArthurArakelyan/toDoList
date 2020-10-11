@@ -1,5 +1,6 @@
 const body = document.querySelector('body');
 const changeTheme = document.querySelector('.changeTheme');
+const toDoName = document.querySelector('.toDoName');
 
 let localDarkMode = localStorage.getItem('theme');
 
@@ -8,11 +9,13 @@ changeTheme.addEventListener('click', () => {
         document.body.classList.add('darkMode');
 
         changeTheme.style.color = 'yellow';
+        toDoName.style.color = 'white';
         localStorage.setItem('theme', 'dark');
     } else {
         document.body.classList.remove('darkMode');
 
         changeTheme.style.color = 'black';
+        toDoName.style.color = 'black';
         localStorage.setItem('theme', 'light');
     }
 });
@@ -21,11 +24,12 @@ if (localDarkMode === 'dark') {
     document.body.classList.add('darkMode');
 
     changeTheme.style.color = 'yellow';
-
+    toDoName.style.color = 'white';
 } else {
     document.body.classList.remove('darkMode');
 
     changeTheme.style.color = 'black';
+    toDoName.style.color = 'black';
 }
 
 const incrementDecrementNumber = document.querySelector('.incrementDecrementNumber');
@@ -81,7 +85,6 @@ defaultBtn.addEventListener('click', () => {
 
 
 const addTodo = document.querySelector('.addTodo');
-const toDoName = document.querySelector('.toDoName');
 const toDoDate = document.querySelector('.toDoDate');
 
 class Todo {
