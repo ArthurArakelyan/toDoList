@@ -95,12 +95,37 @@ button:hover {
     outline: none;
 }
 .toDoName {
-    width: 85%;
+    width: 100%;
     background-color: transparent;
     border: none;
-    border-bottom: dimgray 2px solid;
     outline: none;
+    padding: 0 0 2px 0;
+    font-size: 15px;
 }
+.toDoNameBlock {
+    position: relative;
+    width: 85%;
+}
+.toDoNameBlock::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background-color: dimgray;
+    animation: lineAnim 1s 0s ease-in-out;
+}
+
+@keyframes lineAnim {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
 .addTodo {
     background-color: lightgreen;
     padding: 2px 5px;
@@ -215,11 +240,8 @@ button:hover {
     .wrapper {
         width: 99%;
     }
-    .toDoName {
-        width: 86%;
-    }
     .addTodo {
-        width: 14%;
+        width: 12%;
     }
     .toDoDate {
         justify-content: space-between;
@@ -257,5 +279,11 @@ button:hover {
     }
     .toDoButtons button {
         font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .addTodo {
+        width: 13%;
     }
 }
