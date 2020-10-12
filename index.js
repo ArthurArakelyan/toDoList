@@ -161,6 +161,49 @@ class Todo {
 
             this.toDoWorkFirstContent = this.toDoWorkInput.value;
 
+            this.toDoChangeColor = this.toDoInfo.firstChild.appendChild(document.createElement('button'));
+            this.toDoChangeColor.textContent = 'Color';
+            this.toDoChangeColor.classList.add('toDoChangeColor');
+
+            this.toDoChangeColor.addEventListener('click', () => {
+                this.toDoColors = this.toDoAlertsBlock.appendChild(document.createElement('div'));
+    
+                this.toDoColors.innerHTML = `
+                    <div class="allColors">
+                        <div class="colors">
+                            <div class="colorsLine1">
+                                <div class="colorChange colorChangeRed" data-colors="red"></div>
+                                <div class="colorChange colorChangeBlue" data-colors="blue"></div>
+                                <div class="colorChange colorChangeGreen" data-colors="green"></div>
+                            </div>
+                            <div class="colorsLine2">
+                                <div class="colorChange colorChangeYellow" data-colors="yellow"></div>
+                                <div class="colorChange colorChangeDarkorchid" data-colors="darkorchid"></div>
+                                <div class="colorChange colorChangeOrange" data-colors="orange"></div>
+                            </div>
+                        </div>
+                    </div>`;
+                
+                this.allColors = document.querySelector('.allColors');
+                this.colorChange = document.querySelectorAll('.colorChange');
+    
+                this.colorChange.forEach(elem => {
+                    elem.addEventListener('click', () => {
+                        this.allColors.remove();
+                        this.toDo.style.color = elem.dataset.colors;
+
+                        this.toDoWork.innerHTML = `${this.toDoWorkInput.value}`;
+                        this.toDoConfirmEditing.remove();
+                        this.toDoCreatedTime.innerHTML = `Edited: ${new Date().toLocaleTimeString()}`;
+                        this.toDoEdit.style.display = 'block';
+        
+                        if(!this.toDoWorkInput.value.trim()) {
+                            this.toDoWork.innerHTML = this.toDoWorkFirstContent;
+                        }
+                    });
+                });
+            });
+
             this.toDoConfirmEditing.addEventListener('click', () => {
                 this.toDoWork.innerHTML = `${this.toDoWorkInput.value}`;
                 this.toDoConfirmEditing.remove();
