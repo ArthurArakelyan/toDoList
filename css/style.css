@@ -1,6 +1,9 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
+p {
+    margin: 0;
+}
 
 .wrapper {
     width: 600px;
@@ -31,6 +34,13 @@ body {
 button:hover {
     cursor: pointer;
 }
+
+.header__content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .incrementDecrementInfo button {
     font-size: 26px;
     outline: none;
@@ -49,11 +59,7 @@ button:hover {
     color: white;
 }
 .incrementDecrement {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     font-size: 22px;
-    width: 100%;
 }
 .incrementDecrementNumber {
     margin: 10px 20px;
@@ -221,59 +227,6 @@ button:hover {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-}
-
-.allColors {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 10px 10px;
-}
-.toDoChangeColor {
-    margin-left: 5px;
-}
-.colors {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-}
-.colorsLine1,
-.colorsLine2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-.colorsLine2 {
-    margin-top: 5px;
-}
-.colorChange {
-    width: 30px;
-    height: 30px;
-}
-.colorChange:hover {
-    cursor: pointer;
-    opacity: 0.9;
-}
-.colorChangeRed {
-    background-color: red;
-}
-.colorChangeBlue {
-    background-color: blue;
-}
-.colorChangeGreen {
-    background-color: green;
-}
-.colorChangeYellow {
-    background-color: Yellow;
-}
-.colorChangeDarkorchid {
-    background-color: darkorchid;
-}
-.colorChangeOrange {
-    background-color: orange;
 }
 
 .time {

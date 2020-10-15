@@ -152,6 +152,7 @@ class Todo {
 
         this.toDoEdit.addEventListener('click', () => {
             this.toDoEdit.style.display = 'none';
+            this.modal = this.createModal();
 
             this.toDoWork.innerHTML = `<input type="text" value="${this.toDoWork.textContent.trim()}" class="toDoWorkInput">`;
             this.toDoConfirmEditing = this.toDoButtons.appendChild(document.createElement('button'));
@@ -166,42 +167,8 @@ class Todo {
             this.toDoChangeColor.classList.add('toDoChangeColor');
 
             this.toDoChangeColor.addEventListener('click', () => {
-                this.toDoColors = this.toDoAlertsBlock.appendChild(document.createElement('div'));
-    
-                this.toDoColors.innerHTML = `
-                    <div class="allColors">
-                        <div class="colors">
-                            <div class="colorsLine1">
-                                <div class="colorChange colorChangeRed" data-colors="red"></div>
-                                <div class="colorChange colorChangeBlue" data-colors="blue"></div>
-                                <div class="colorChange colorChangeGreen" data-colors="green"></div>
-                            </div>
-                            <div class="colorsLine2">
-                                <div class="colorChange colorChangeYellow" data-colors="yellow"></div>
-                                <div class="colorChange colorChangeDarkorchid" data-colors="darkorchid"></div>
-                                <div class="colorChange colorChangeOrange" data-colors="orange"></div>
-                            </div>
-                        </div>
-                    </div>`;
-                
-                this.allColors = document.querySelector('.allColors');
-                this.colorChange = document.querySelectorAll('.colorChange');
-    
-                this.colorChange.forEach(elem => {
-                    elem.addEventListener('click', () => {
-                        this.allColors.remove();
-                        this.toDo.style.color = elem.dataset.colors;
-
-                        this.toDoWork.innerHTML = `${this.toDoWorkInput.value}`;
-                        this.toDoConfirmEditing.remove();
-                        this.toDoCreatedTime.innerHTML = `Edited: ${new Date().toLocaleTimeString()}`;
-                        this.toDoEdit.style.display = 'block';
-        
-                        if(!this.toDoWorkInput.value.trim()) {
-                            this.toDoWork.innerHTML = this.toDoWorkFirstContent;
-                        }
-                    });
-                });
+                this.modal.classList.add('open');
+                this.toDoWork.innerHTML = `${this.toDoWorkFirstContent}`;
             });
 
             this.toDoConfirmEditing.addEventListener('click', () => {
@@ -213,6 +180,8 @@ class Todo {
                 if(!this.toDoWorkInput.value.trim()) {
                     this.toDoWork.innerHTML = this.toDoWorkFirstContent;
                 }
+
+                this.modal.remove();
             });
         });
 
@@ -241,6 +210,127 @@ class Todo {
 
             this.toDoAlertRemoving(this.toDoRemoveAlert);
         });
+    }
+
+    createModal() {
+        this.modal = document.body.appendChild(document.createElement('div'));
+        this.modal.classList.add('modal');
+
+        this.modal.innerHTML = `
+            <div class="modal__overlay">
+                <div class="modal__content">
+                    <div class="modal__header">
+                        <span class="modal__title">Change Colors</span>
+                        <span class="modal__close">&times;</span>
+                    </div>
+                    <div class="modal__body">
+                        <div class="allColors">
+                            <div class="colors">
+                                <div class="colorsLines colorsLine1">
+                                    <div class="colorChange" data-colors="red"></div>
+                                    <div class="colorChange" data-colors="blue"></div>
+                                    <div class="colorChange" data-colors="green"></div>
+                                    <div class="colorChange" data-colors="darkgreen"></div>
+                                    <div class="colorChange" data-colors="lightgreen"></div>
+                                </div>
+                                <div class="colorsLines colorsLine2">
+                                    <div class="colorChange" data-colors="yellow"></div>
+                                    <div class="colorChange" data-colors="darkorchid"></div>
+                                    <div class="colorChange" data-colors="orange"></div>
+                                    <div class="colorChange" data-colors="pink"></div>
+                                    <div class="colorChange" data-colors="cyan"></div>
+                                </div>
+                                <div class="colorsLines colorsLine3">
+                                    <div class="colorChange" data-colors="white"></div>
+                                    <div class="colorChange" data-colors="black"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal__footer">
+                        <button class="modal__ok">OK</button>
+                        <button class="modal__closeBtn">Close</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        this.modalColors(); 
+
+        this.modalOk = document.querySelector('.modal__ok');
+        this.modalClose = document.querySelector('.modal__close');
+        this.modalCloseBtn = document.querySelector('.modal__closeBtn');
+
+        this.modalOk.addEventListener('click', () => {
+            this.modal.classList.remove('open');
+            this.modal.classList.add('hide');
+
+            this.toDoWork.innerHTML = `${this.toDoWorkFirstContent}`;
+            this.toDoConfirmEditing.remove();
+            this.toDoCreatedTime.innerHTML = `Edited: ${new Date().toLocaleTimeString()}`;
+            this.toDoEdit.style.display = 'block';
+
+            this.toDoColorChanging = document.querySelector('.toDoColorChanging');
+            this.toDo.style.color = getComputedStyle(this.toDoColorChanging)['color'];
+        
+            setTimeout(() => {
+                this.modal.classList.remove('hide');
+                this.modal.remove();
+            }, 200);
+
+            if(getComputedStyle(this.modalToDo)['color'] === 'rgb(255, 255, 255)' 
+            || getComputedStyle(this.modalToDo)['color'] === 'rgb(0, 0, 0)') {
+                this.toDo.style.color = 'inherit';
+            } else {
+                this.toDo.style.color = getComputedStyle(this.toDoColorChanging)['color'];
+            }
+        });
+
+        this.modalClose.addEventListener('click', this.modalClosing);
+        this.modalCloseBtn.addEventListener('click', this.modalClosing);
+
+        return this.modal;
+    }
+
+    modalColors = () => {
+        this.allColors = document.querySelector('.allColors');
+        this.colorChange = document.querySelectorAll('.colorChange');
+
+        this.modalBody = document.querySelector('.modal__body');
+        this.modalBody.appendChild(document.createElement('div'));
+        this.modalToDo = this.modalBody.appendChild(this.toDo.cloneNode(true));
+        this.modalToDo.classList.remove('toDo');
+        this.modalToDo.classList.add('toDoColorChanging');
+        this.modalToDo.lastChild.remove();
+
+        if(getComputedStyle(document.body)['backgroundColor'] === 'rgb(32, 32, 32)') {
+            this.modalToDo.classList.add('toDoColorChangingDark');
+        } else {
+            this.modalToDo.classList.remove('toDoColorChangingDark');
+        }
+
+        this.colorChange.forEach(elem => {
+            elem.style.backgroundColor = elem.dataset.colors;
+
+            elem.addEventListener('click', () => {
+                this.modalToDo.style.color = elem.dataset.colors;
+            });
+        });
+    }
+
+    modalClosing = () => {
+        this.modal.classList.remove('open');
+        this.modal.classList.add('hide');
+        this.toDo.style.color = this.toDoComputedColor;
+
+        this.toDoWork.innerHTML = this.toDoWorkInput.value;
+        this.toDoConfirmEditing.remove();
+        this.toDoEdit.style.display = 'block';
+    
+        setTimeout(() => {
+            this.modal.classList.remove('hide');
+            this.modal.remove();
+        }, 200);
     }
 
     toDoAlertRemoving(alert) {

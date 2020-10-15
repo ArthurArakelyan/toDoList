@@ -4,32 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="fontAwesome/fonts.css">
 </head>
 <body>
-    <div class="incrementDecrement">
-        <div class="incrementDecrementInfo">
-            <button class="plus">+</button><p class="incrementDecrementNumber">0</p><button class="minus">-</button>
-            <button type="button" class="defaultBtn">Default</button>
-        </div>
-
-        <button type="button" class="changeTheme fontAwesomeLight">sun</button>
-    </div>
-
-    <div class="wrapper">
-        <div class="toDoList">
-            <div class="toDoTime">
-                <h2 class="toDoh2">To Do</h2>
+    <header>
+        <div class="header__content">
+            <div class="incrementDecrement">
+                <div class="incrementDecrementInfo">
+                    <button class="plus">+</button><p class="incrementDecrementNumber">0</p><button class="minus">-</button>
+                    <button type="button" class="defaultBtn">Default</button>
+                </div>
             </div>
-            <form class="toDoDate">
-                <div class="toDoNameBlock"><input type="text" value="" placeholder="Name" class="toDoName"></div>
-                <button class="addTodo">Add</button>
-            </form>
-        </div>
-    </div>
 
-    <div class="toDoAlertsBlock"></div>
+            <button type="button" class="changeTheme fontAwesomeLight">sun</button>
+        </div>
+    </header>
+    <main>
+        <div class="wrapper">
+            <div class="toDoList">
+                <div class="toDoTime">
+                    <h2 class="toDoh2">To Do</h2>
+                </div>
+                <form class="toDoDate">
+                    <div class="toDoNameBlock"><input type="text" value="" placeholder="Name" class="toDoName"></div>
+                    <button class="addTodo">Add</button>
+                </form>
+            </div>
+        </div>
+    
+        <div class="toDoAlertsBlock"></div>
+    </main>
     
     <script src="index.js"></script>
 </body>
