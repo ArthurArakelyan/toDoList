@@ -211,6 +211,12 @@ class Todo {
 
             this.toDoAlertRemoving(this.toDoRemoveAlert);
         });
+
+        this.toDoDate.addEventListener('submit', (e) => {
+            e.preventDefault();
+            new Todo();
+            this.toDoName.value = '';
+        });
     }
 
     createModal() {
@@ -258,6 +264,7 @@ class Todo {
 
         this.modalColors();
 
+        // this.colorChange.style.boxShadow = `0px 0px 10px 1px black`;
         this.modalOk = document.querySelector('.modal__ok');
         this.modalClose = document.querySelector('.modal__close');
         this.modalCloseBtn = document.querySelector('.modal__closeBtn');
@@ -312,6 +319,7 @@ class Todo {
 
         this.colorChange.forEach(elem => {
             elem.style.backgroundColor = elem.dataset.colors;
+            elem.style.boxShadow = `0px 0px 10px 0px ${elem.dataset.colors}`;
 
             elem.addEventListener('click', () => {
                 this.modalToDo.style.color = elem.dataset.colors;
@@ -353,17 +361,12 @@ class Todo {
         }, 1000);
     }
 
+    toDoDate = document.querySelector('.toDoDate');
     toDoAlertsBlock = document.querySelector('.toDoAlertsBlock');
     toDoClock = document.querySelector('.toDoTime');
     toDoList = document.querySelector('.toDoList');
     toDoName = document.querySelector('.toDoName');
 }
-
-toDoDate.addEventListener('submit', (e) => {
-    e.preventDefault();
-    new Todo();
-    toDoName.value = '';
-});
 
 const ToDo = new Todo();
 ToDo.toDoTime();
