@@ -159,6 +159,7 @@ class Todo {
             this.toDoConfirmEditing.innerHTML = 'Confirm';
             this.toDoConfirmEditing.classList.add('toDoConfirmEditing');
             this.toDoWorkInput = document.querySelector('.toDoWorkInput');
+            this.toDoWorkInput.style.border = `2px ${getComputedStyle(this.toDo)['color']} solid`;
 
             this.toDoWorkFirstContent = this.toDoWorkInput.value;
 
@@ -255,7 +256,7 @@ class Todo {
             </div>
         `;
 
-        this.modalColors(); 
+        this.modalColors();
 
         this.modalOk = document.querySelector('.modal__ok');
         this.modalClose = document.querySelector('.modal__close');

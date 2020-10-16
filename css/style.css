@@ -181,6 +181,10 @@ button:hover {
     margin: 0;
     line-break: anywhere;
 }
+.toDoWorkInput {
+    border-radius: 2px;
+    outline: none;
+}
 .toDoButtons {
     display: flex;
     align-items: center;
