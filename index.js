@@ -249,8 +249,10 @@ class Todo {
                                 </div>
                                 <div class="colorsLines colorsLine3">
                                     <div class="colorChange" data-colors="white"></div>
+                                    <div class="colorChange" data-colors="gray"></div>
                                     <div class="colorChange" data-colors="black"></div>
                                 </div>
+                                <button class="randomColorBtn">Random Color</button>
                             </div>
                         </div>
                     </div>
@@ -264,10 +266,14 @@ class Todo {
 
         this.modalColors();
 
-        // this.colorChange.style.boxShadow = `0px 0px 10px 1px black`;
         this.modalOk = document.querySelector('.modal__ok');
         this.modalClose = document.querySelector('.modal__close');
         this.modalCloseBtn = document.querySelector('.modal__closeBtn');
+        this.randomColorBtn = document.querySelector('.randomColorBtn');
+
+        this.randomColorBtn.addEventListener('click', () => {
+            this.modalToDo.style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        });
 
         this.modalOk.addEventListener('click', () => {
             this.modal.classList.remove('open');
@@ -325,12 +331,13 @@ class Todo {
                 this.modalToDo.style.color = elem.dataset.colors;
             });
         });
+
+        return this.modalToDo;
     }
 
     modalClosing = () => {
         this.modal.classList.remove('open');
         this.modal.classList.add('hide');
-        this.toDo.style.color = this.toDoComputedColor;
 
         this.toDoWork.innerHTML = this.toDoWorkInput.value;
         this.toDoConfirmEditing.remove();
