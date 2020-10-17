@@ -272,7 +272,9 @@ class Todo {
         this.randomColorBtn = document.querySelector('.randomColorBtn');
 
         this.randomColorBtn.addEventListener('click', () => {
-            this.modalToDo.style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            this.randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            this.modalToDo.style.color = this.randomColor;
+            this.randomColorBtn.style.boxShadow = `0px 0px 4px 0px ${this.randomColor}`;
         });
 
         this.modalOk.addEventListener('click', () => {
@@ -281,7 +283,7 @@ class Todo {
 
             this.toDoWork.innerHTML = `${this.toDoWorkFirstContent}`;
             this.toDoConfirmEditing.remove();
-            this.toDoCreatedTime.innerHTML = `Edited: ${new Date().toLocaleTimeString()}`;
+            this.toDoCreatedTime.innerHTML = `Edited Color: ${new Date().toLocaleTimeString()}`;
             this.toDoEdit.style.display = 'block';
 
             this.toDoColorChanging = document.querySelector('.toDoColorChanging');

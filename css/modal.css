@@ -48,7 +48,7 @@
     background-color: white;
     margin: 0 auto;
     transform: translateY(-320px);
-    transition: transform .3s ease-in-out;
+    transition: transform .2s ease-in-out;
 }
 .modal__header {
     color: black;
@@ -119,6 +119,7 @@
 .randomColorBtn {
     width: 100%;
     margin-top: 10px;
+    transition: box-shadow .2s ease-in-out;
 }
 
 .modal__footer {
