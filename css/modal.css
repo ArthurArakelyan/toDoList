@@ -19,7 +19,7 @@
 }
 
 .modal.hide .modal__content {
-    transform: translateY(-320px);
+    transform: translateY(-351px);
 }
 
 .modal.hide .modal__overlay {
@@ -47,8 +47,8 @@
     border-radius: 5px;
     background-color: white;
     margin: 0 auto;
-    transform: translateY(-320px);
-    transition: transform .2s ease-in-out;
+    transform: translateY(-351px);
+    transition: transform .3s ease-in-out;
 }
 .modal__header {
     color: black;
