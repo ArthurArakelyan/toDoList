@@ -182,7 +182,7 @@ class Todo {
                         </div>
                     </div>
                 `,
-                closingFunction: 'modalColorsClosing'
+                closingFunction: this.modalColorsClosing
             });
 
             this.modalColors();
@@ -294,11 +294,7 @@ class Todo {
 
         this.modal.addEventListener('click', event => {
             if(event.target.dataset.close) {
-                if(options.closingFunction === 'modalColorsClosing') {
-                    this.modalColorsClosing();
-                } else {
-                    this.modalClosing();
-                }
+                options.closingFunction();
             }
         });
 
