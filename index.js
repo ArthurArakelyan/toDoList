@@ -152,7 +152,75 @@ class Todo {
 
         this.toDoEdit.addEventListener('click', () => {
             this.toDoEdit.style.display = 'none';
-            this.modal = this.createModal();
+
+            this.modal = this.createModal({
+                title: 'Change Colors',
+                width: '400px',
+                content: `
+                    <div class="allColors">
+                        <div class="colors">
+                            <div class="colorsLines colorsLine1">
+                                <div class="colorChange" data-colors="red"></div>
+                                <div class="colorChange" data-colors="blue"></div>
+                                <div class="colorChange" data-colors="green"></div>
+                                <div class="colorChange" data-colors="darkgreen"></div>
+                                <div class="colorChange" data-colors="lightgreen"></div>
+                            </div>
+                            <div class="colorsLines colorsLine2">
+                                <div class="colorChange" data-colors="yellow"></div>
+                                <div class="colorChange" data-colors="darkorchid"></div>
+                                <div class="colorChange" data-colors="orange"></div>
+                                <div class="colorChange" data-colors="pink"></div>
+                                <div class="colorChange" data-colors="cyan"></div>
+                            </div>
+                            <div class="colorsLines colorsLine3">
+                                <div class="colorChange" data-colors="white"></div>
+                                <div class="colorChange" data-colors="gray"></div>
+                                <div class="colorChange" data-colors="black"></div>
+                            </div>
+                            <button class="randomColorBtn">Random Color</button>
+                        </div>
+                    </div>
+                `,
+                closingFunction: 'modalColorsClosing'
+            });
+
+            this.modalColors();
+
+            this.modalOk = document.querySelector('.modal__ok');
+            this.randomColorBtn = document.querySelector('.randomColorBtn');
+
+            this.randomColorBtn.addEventListener('click', () => {
+                this.randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                this.modalToDo.style.color = this.randomColor;
+                this.randomColorBtn.style.boxShadow = `0px 0px 4px 0px ${this.randomColor}`;
+            });
+
+            this.modalOk.addEventListener('click', () => {
+                this.modal.classList.remove('open');
+                this.modal.classList.add('hide');
+
+                this.toDoWork.innerHTML = `${this.toDoWorkFirstContent}`;
+                this.toDoConfirmEditing.remove();
+                this.toDoCreatedTime.innerHTML = `Edited Color: ${new Date().toLocaleTimeString()}`;
+                this.toDoEdit.style.display = 'block';
+
+                this.toDoColorChanging = document.querySelector('.toDoColorChanging');
+                this.toDo.style.color = getComputedStyle(this.toDoColorChanging)['color'];
+            
+                setTimeout(() => {
+                    this.modal.classList.remove('hide');
+                    this.modal.remove();
+                }, 200);
+
+                if(getComputedStyle(this.modalToDo)['color'] === 'rgb(255, 255, 255)' 
+                || getComputedStyle(this.modalToDo)['color'] === 'rgb(0, 0, 0)') {
+                    this.toDo.style.color = 'inherit';
+                } else {
+                    this.toDo.style.color = getComputedStyle(this.toDoColorChanging)['color'];
+                }
+            });
+
 
             this.toDoWork.innerHTML = `<input type="text" value="${this.toDoWork.textContent.trim()}" class="toDoWorkInput">`;
             this.toDoConfirmEditing = this.toDoButtons.appendChild(document.createElement('button'));
@@ -219,91 +287,38 @@ class Todo {
         });
     }
 
-    createModal() {
+    createModal(options) {
+        this.DEFAULTH_WIDTH = '400px';
         this.modal = document.body.appendChild(document.createElement('div'));
         this.modal.classList.add('modal');
 
+        this.modal.addEventListener('click', event => {
+            if(event.target.dataset.close) {
+                if(options.closingFunction === 'modalColorsClosing') {
+                    this.modalColorsClosing();
+                } else {
+                    this.modalClosing();
+                }
+            }
+        });
+
         this.modal.innerHTML = `
-            <div class="modal__overlay">
-                <div class="modal__content">
+            <div class="modal__overlay" data-close="true">
+                <div class="modal__content" style="width: ${options.width || this.DEFAULTH_WIDTH}">
                     <div class="modal__header">
-                        <span class="modal__title">Change Colors</span>
-                        <span class="modal__close">&times;</span>
+                        <span class="modal__title">${options.title || 'Modal'}</span>
+                        <span class="modal__close" data-close="true">&times;</span>
                     </div>
-                    <div class="modal__body">
-                        <div class="allColors">
-                            <div class="colors">
-                                <div class="colorsLines colorsLine1">
-                                    <div class="colorChange" data-colors="red"></div>
-                                    <div class="colorChange" data-colors="blue"></div>
-                                    <div class="colorChange" data-colors="green"></div>
-                                    <div class="colorChange" data-colors="darkgreen"></div>
-                                    <div class="colorChange" data-colors="lightgreen"></div>
-                                </div>
-                                <div class="colorsLines colorsLine2">
-                                    <div class="colorChange" data-colors="yellow"></div>
-                                    <div class="colorChange" data-colors="darkorchid"></div>
-                                    <div class="colorChange" data-colors="orange"></div>
-                                    <div class="colorChange" data-colors="pink"></div>
-                                    <div class="colorChange" data-colors="cyan"></div>
-                                </div>
-                                <div class="colorsLines colorsLine3">
-                                    <div class="colorChange" data-colors="white"></div>
-                                    <div class="colorChange" data-colors="gray"></div>
-                                    <div class="colorChange" data-colors="black"></div>
-                                </div>
-                                <button class="randomColorBtn">Random Color</button>
-                            </div>
-                        </div>
+                    <div class="modal__body" style="color: ${options.color || 'black'};">
+                        ${options.content || ''}
                     </div>
                     <div class="modal__footer">
                         <button class="modal__ok">OK</button>
-                        <button class="modal__closeBtn">Close</button>
+                        <button class="modal__closeBtn" data-close="true">Close</button>
                     </div>
                 </div>
             </div>
         `;
-
-        this.modalColors();
-
-        this.modalOk = document.querySelector('.modal__ok');
-        this.modalClose = document.querySelector('.modal__close');
-        this.modalCloseBtn = document.querySelector('.modal__closeBtn');
-        this.randomColorBtn = document.querySelector('.randomColorBtn');
-
-        this.randomColorBtn.addEventListener('click', () => {
-            this.randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-            this.modalToDo.style.color = this.randomColor;
-            this.randomColorBtn.style.boxShadow = `0px 0px 4px 0px ${this.randomColor}`;
-        });
-
-        this.modalOk.addEventListener('click', () => {
-            this.modal.classList.remove('open');
-            this.modal.classList.add('hide');
-
-            this.toDoWork.innerHTML = `${this.toDoWorkFirstContent}`;
-            this.toDoConfirmEditing.remove();
-            this.toDoCreatedTime.innerHTML = `Edited Color: ${new Date().toLocaleTimeString()}`;
-            this.toDoEdit.style.display = 'block';
-
-            this.toDoColorChanging = document.querySelector('.toDoColorChanging');
-            this.toDo.style.color = getComputedStyle(this.toDoColorChanging)['color'];
-        
-            setTimeout(() => {
-                this.modal.classList.remove('hide');
-                this.modal.remove();
-            }, 200);
-
-            if(getComputedStyle(this.modalToDo)['color'] === 'rgb(255, 255, 255)' 
-            || getComputedStyle(this.modalToDo)['color'] === 'rgb(0, 0, 0)') {
-                this.toDo.style.color = 'inherit';
-            } else {
-                this.toDo.style.color = getComputedStyle(this.toDoColorChanging)['color'];
-            }
-        });
-
-        this.modalClose.addEventListener('click', this.modalClosing);
-        this.modalCloseBtn.addEventListener('click', this.modalClosing);
 
         return this.modal;
     }
@@ -331,19 +346,30 @@ class Todo {
 
             elem.addEventListener('click', () => {
                 this.modalToDo.style.color = elem.dataset.colors;
+                this.randomColorBtn.style.boxShadow = `0px 0px 4px 0px ${elem.dataset.colors}`;
             });
         });
 
         return this.modalToDo;
     }
 
-    modalClosing = () => {
+    modalColorsClosing = () => {
         this.modal.classList.remove('open');
         this.modal.classList.add('hide');
 
         this.toDoWork.innerHTML = this.toDoWorkInput.value;
         this.toDoConfirmEditing.remove();
         this.toDoEdit.style.display = 'block';
+    
+        setTimeout(() => {
+            this.modal.classList.remove('hide');
+            this.modal.remove();
+        }, 200);
+    }
+
+    modalClosing = () => {
+        this.modal.classList.remove('open');
+        this.modal.classList.add('hide');
     
         setTimeout(() => {
             this.modal.classList.remove('hide');
