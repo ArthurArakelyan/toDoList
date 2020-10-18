@@ -133,8 +133,8 @@
     margin-left: 5px;
 }
 
-@media only screen and (max-width: 405px) {
+@media only screen and (max-width: 430px) {
     .modal__content {
-        width: 90%;
+        width: 90% !important;
     }
 }
