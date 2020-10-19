@@ -271,10 +271,18 @@ class Todo {
                 this.toDoList.appendChild(this.toDo);
                 this.toDo.firstChild.lastChild.innerHTML = this.toDoRemovedTime;
                 this.toDoRemoveAlert.remove();
+
+                if(this.toDoButtons.lastChild.textContent === 'Confirm') {
+                    document.body.appendChild(this.modal);
+                }
             });
 
             if(this.toDoRemoveAlert.firstChild.firstChild.firstChild.tagName === 'INPUT') {
                 this.toDoRemoveAlert.firstChild.firstChild.innerHTML = this.toDoWorkFirstContent;
+            }
+
+            if(this.toDoButtons.lastChild.textContent === 'Confirm') {
+                this.modal.remove();
             }
 
             this.toDoAlertRemoving(this.toDoRemoveAlert);
