@@ -287,12 +287,6 @@ class Todo {
 
             this.toDoAlertRemoving(this.toDoRemoveAlert);
         });
-
-        this.toDoDate.addEventListener('submit', (e) => {
-            e.preventDefault();
-            new Todo();
-            this.toDoName.value = '';
-        });
     }
 
     createModal(options) {
@@ -406,6 +400,12 @@ class Todo {
     toDoList = document.querySelector('.toDoList');
     toDoName = document.querySelector('.toDoName');
 }
+
+toDoDate.addEventListener('submit', (e) => {
+    e.preventDefault();
+    new Todo();
+    toDoName.value = '';
+});
 
 const ToDo = new Todo();
 ToDo.toDoTime();
