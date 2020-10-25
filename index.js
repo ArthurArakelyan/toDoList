@@ -96,7 +96,7 @@ class Todo {
         this.toDoInfo.classList.add('toDoInfo');
 
         this.toDoWork = this.toDoInfo.appendChild(document.createElement('h3'));
-        this.toDoWork.innerHTML = `${this.toDoName.value}`;
+        this.toDoWork.innerHTML = this.toDoName.value;
         this.toDoWork.classList.add('toDoWork');
 
         this.toDoCreatedTime = this.toDoInfo.appendChild(document.createElement('p'));
@@ -221,7 +221,7 @@ class Todo {
                     this.modal.classList.remove('open');
                     this.modal.classList.add('hide');
     
-                    this.toDoWork.innerHTML = `${this.toDoWorkFirstContent}`;
+                    this.toDoWork.innerHTML = this.toDoWorkFirstContent;
                     this.toDoConfirmEditing.remove();
                     this.toDoCreatedTime.innerHTML = `Edited Color: ${new Date().toLocaleTimeString()}`;
                     this.toDoEdit.style.display = 'block';
@@ -241,9 +241,9 @@ class Todo {
 
                 setTimeout(() => {
                     this.modal.classList.add('open');
-                }, 1);
+                }, 5);
 
-                this.toDoWork.innerHTML = `${this.toDoWorkFirstContent}`;
+                this.toDoWork.innerHTML = this.toDoWorkFirstContent;
             });
 
             this.toDoConfirmEditing.addEventListener('click', () => {
@@ -356,7 +356,7 @@ class Todo {
         this.modal.classList.remove('open');
         this.modal.classList.add('hide');
 
-        this.toDoWork.innerHTML = this.toDoWorkInput.value;
+        this.toDoWork.innerHTML = this.toDoWorkFirstContent;
         this.toDoConfirmEditing.remove();
         this.toDoEdit.style.display = 'block';
     

@@ -133,10 +133,10 @@ button:hover {
 }
 
 .addTodo {
-    background-color: lightgreen;
+    background-color: orange;
     padding: 2px 5px;
-    border: dimgray 2px solid;
     border-radius: 3px;
+    border: none;
     width: 10%;
     outline: none;
 }
