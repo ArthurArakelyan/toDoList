@@ -185,6 +185,12 @@ button:hover {
     border-radius: 2px;
     outline: none;
 }
+.toDoWorkInput::placeholder {
+    transition: color 0.2s ease-in-out;
+}
+.redPlaceholder::placeholder {
+    color: red;
+}
 .toDoButtons {
     display: flex;
     align-items: center;
@@ -250,9 +256,6 @@ button:hover {
     .wrapper {
         width: 99%;
     }
-    .addTodo {
-        width: 12%;
-    }
     .toDoDate {
         justify-content: space-between;
     }
@@ -289,11 +292,5 @@ button:hover {
     }
     .toDoButtons button {
         font-size: 12px;
-    }
-}
-
-@media only screen and (max-width: 360px) {
-    .addTodo {
-        width: 13%;
     }
 }

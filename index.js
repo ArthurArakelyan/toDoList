@@ -153,7 +153,7 @@ class Todo {
         this.toDoEdit.addEventListener('click', () => {
             this.toDoEdit.style.display = 'none';
 
-            this.toDoWork.innerHTML = `<input type="text" value="${this.toDoWork.textContent.trim()}" class="toDoWorkInput">`;
+            this.toDoWork.innerHTML = `<input type="text" value="${this.toDoWork.textContent.trim()}" placeholder="Name" class="toDoWorkInput">`;
             this.toDoConfirmEditing = this.toDoButtons.appendChild(document.createElement('button'));
             this.toDoConfirmEditing.innerHTML = 'Confirm';
             this.toDoConfirmEditing.classList.add('toDoConfirmEditing');
@@ -247,20 +247,22 @@ class Todo {
             });
 
             this.toDoConfirmEditing.addEventListener('click', () => {
-                if(this.toDoWorkInput.value === this.toDoWorkFirstContent) {
-                    this.toDoWork.innerHTML = this.toDoWorkInput.value;
-                    this.toDoConfirmEditing.remove();
-                    this.toDoEdit.style.display = 'block';
+                if(!this.toDoWorkInput.value.trim()) {
+                    this.toDoWorkInput.classList.add('redPlaceholder');
                 } else {
                     this.toDoWork.innerHTML = this.toDoWorkInput.value;
                     this.toDoConfirmEditing.remove();
-                    this.toDoEdit.style.display = 'block';
                     this.toDoCreatedTime.innerHTML = `Edited: ${new Date().toLocaleTimeString()}`;
+                    this.toDoEdit.style.display = 'block';
                 }
-
-                if(!this.toDoWorkInput.value.trim()) {
-                    this.toDoWork.innerHTML = this.toDoWorkFirstContent;
-                }
+                
+                this.toDoWorkInput.addEventListener('input', () => {
+                    if(this.toDoWorkInput.value.trim()) {
+                        this.toDoWorkInput.classList.remove('redPlaceholder');
+                    } else {
+                        this.toDoWorkInput.classList.add('redPlaceholder');
+                    }
+                });
             });
         });
 
