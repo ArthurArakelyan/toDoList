@@ -111,7 +111,12 @@
 }
 .colorChange:hover {
     cursor: pointer;
-    opacity: 0.7;
+}
+.colorChangeOpacity:hover {
+    opacity: 0.8;
+}
+.opacity1 {
+    opacity: 1;
 }
 .toDoColorChanging {
     max-height: 100px;

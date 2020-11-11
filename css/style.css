@@ -178,9 +178,6 @@ button:hover {
     transition: opacity 2s ease-in-out;
     color: red !important;
 }
-.scrollLock {
-    overflow: hidden;
-}
 .completedToDo {
     margin: 0 0 10px 10px;
     opacity: 1;

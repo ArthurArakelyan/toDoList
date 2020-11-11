@@ -111,7 +111,14 @@ class Todo {
         });
 
         this.toDoEdit.addEventListener('click', () => {
-            document.body.classList.add('scrollLock');
+            let scrollX = window.scrollX
+            let scrollY = window.scrollY;
+
+            this.scrollLock = () => {
+                window.scrollTo(scrollX, scrollY);
+            }
+
+            window.addEventListener('scroll', this.scrollLock);
 
             this.modal = this.createModal({
                 title: 'Editing',
@@ -191,9 +198,9 @@ class Todo {
             });
 
             this.modalOk.addEventListener('click', () => {
+                window.removeEventListener('scroll', this.scrollLock);
                 this.modal.classList.remove('open');
                 this.modal.classList.add('hide');
-                document.body.classList.remove('scrollLock');
 
                 this.toDoWork.textContent = this.modalColor.firstChild.firstChild.textContent;
                 this.toDoCreatedTime.innerHTML = `Edited: ${new Date().toLocaleTimeString()}`;
@@ -219,8 +226,12 @@ class Todo {
                     time += 50;
     
                     setTimeout(() => {
-                        color.style.opacity = 1;
+                        color.classList.add('opacity1');
                     }, time);
+
+                    setTimeout(() => {
+                        color.classList.add('colorChangeOpacity');
+                    }, 800);
                 });
             }, 10);
         });
@@ -315,9 +326,9 @@ class Todo {
     }
 
     modalClosing = () => {
+        window.removeEventListener('scroll', this.scrollLock);
         this.modal.classList.remove('open');
         this.modal.classList.add('hide');
-        document.body.classList.remove('scrollLock');
     
         setTimeout(() => {
             this.modal.classList.remove('hide');
